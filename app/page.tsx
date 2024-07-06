@@ -1,7 +1,5 @@
-import Image from "next/image";
+import { ProfileOverView } from "./components/ProfileOverView";
 
 export default function Home() {
-  return (
-    <></>
-  );
+  return <ProfileOverView />;
 }
