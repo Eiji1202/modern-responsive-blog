@@ -3,12 +3,18 @@
 import Image from "next/image";
 import ProfilePic from "../../public/patrickBravo.jpeg";
 import { PROFILE } from "../constants";
-import { FaDownload, FaDownLong } from "react-icons/fa6";
+import { FaDownload } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export const ProfileOverView = () => {
   return (
     <div className="my-24">
-      <div className="flex flex-col items-center justify-center gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="flex flex-col items-center justify-center gap-4"
+      >
         <Image
           src={ProfilePic}
           alt="profilePic"
@@ -29,7 +35,16 @@ export const ProfileOverView = () => {
           <FaDownload />
         </a>
         <p className="my-10 text-center text-5xl font-semibold tracking-tighter lg:text-[8rem]">
-          {PROFILE.greet}
+          {PROFILE.greet.split("").map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: index * 0.15 }}
+            >
+              {char}
+            </motion.span>
+          ))}
         </p>
         <p className="mb-10 max-w-2xl p-1 text-center text-xl tracking-tight text-slate-400 lg:text-3xl">
           I am a passionate{" "}
@@ -43,7 +58,7 @@ export const ProfileOverView = () => {
           development, ensuring a cohesive and efficient user experience from
           start to finish.
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };
